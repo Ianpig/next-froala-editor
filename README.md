@@ -1,44 +1,66 @@
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/zeit/next.js/tree/master/examples/with-next-css)
+# next-froala-editor
+it use next.js build with froala editor
 
-# next-css example
+## Install npm modules
+```yarn```
+or
+```npm i```
 
-## How to use
+## build next
+```
+yarn build
 
-### Using `create-next-app`
-
-Execute [`create-next-app`](https://github.com/segmentio/create-next-app) with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) or [npx](https://github.com/zkat/npx#readme) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-next-css with-next-css-app
-# or
-yarn create next-app --example with-next-css with-next-css-app
+```
+or
+```
+npm run build
 ```
 
-### Download manually
-
-Download the example:
-
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-next-css
-cd with-next-css
+## start server
+```
+yarn start
 ```
 
-Install it and run:
-
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
+```
+npm start
 ```
 
-Deploy it to the cloud with [now](https://zeit.co/now) ([download](https://zeit.co/download))
+## froala config
+Block server side render
+```
+...
+// Require Editor JS files.
+import 'froala-editor/js/froala_editor.pkgd.min.js';
+import 'froala-editor/js/third_party/embedly.min.js';
 
-```bash
-now
+
+// That's where the magic happens 
+const FroalaEditorInput = dynamic(import('react-froala-wysiwyg'), {
+  ssr: false
+});
+
+class EditorComponent extends React.Component {
+...
+
 ```
 
-## The idea behind the example
+next.config.js
 
-This example demonstrates how to use the [next-css plugin](https://github.com/zeit/next-plugins/tree/master/packages/next-css) It includes patterns for with and without CSS Modules, with PostCSS and with additional webpack configurations on top of the next-css plugin.
+make it can use jquery
+```
+const webpack = require('webpack');
+
+/* Without CSS Modules, with PostCSS */
+module.exports = withCSS({
+  webpack: (config, { dev }) => {
+    config.plugins.push(
+      new webpack.ProvidePlugin({
+        '$': 'jquery',
+        'jQuery': 'jquery',
+      })
+    )
+    return config
+  }
+})
+
+```
