@@ -20,7 +20,7 @@ npm run build
 ```
 yarn start
 ```
-
+or
 ```
 npm start
 ```
@@ -44,8 +44,7 @@ class EditorComponent extends React.Component {
 
 ```
 
-next.config.js
-
+## next.config.js
 make it can use jquery
 ```
 const webpack = require('webpack');
