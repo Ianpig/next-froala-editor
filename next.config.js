@@ -1,8 +1,7 @@
-const withCSS = require('@zeit/next-css');
 const webpack = require('webpack');
 
 /* Without CSS Modules, with PostCSS */
-module.exports = withCSS({
+module.exports = {
   webpack: (config, { dev }) => {
     config.plugins.push(
         new webpack.ProvidePlugin({
@@ -11,8 +10,8 @@ module.exports = withCSS({
         })
     )
     return config
+  }
 }
-})
 
 /* With CSS Modules */
 // module.exports = withCSS({ cssModules: true })
